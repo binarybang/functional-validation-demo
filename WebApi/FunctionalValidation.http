@@ -1,0 +1,58 @@
+@FunctionalValidation_HostAddress = http://localhost:5259
+
+### Request to FluentValidation-based endpoint
+POST {{FunctionalValidation_HostAddress}}/insurances/fluent
+Accept: application/json
+Content-Type: application/json
+
+{
+  "mainApplicant": {
+    "firstName": "John",
+    "lastName": "Smith",
+    "dateOfBirth": "2020-01-02"
+  },
+  "policyDetails": {
+    "startDate": "2025-12-31"
+  },
+  "hasRefusalProblem": true,
+  "refusalYear": 2023,
+  "refusalReason": "Reason for refusal"
+}
+
+### Request to FluentValidation-based endpoint when validation has been skipped
+POST {{FunctionalValidation_HostAddress}}/insurances/fluent
+Accept: application/json
+Content-Type: application/json
+
+{
+  "mainApplicant": {
+    "firstName": "John",
+    "lastName": "Smith",
+    "dateOfBirth": "2020-01-02"
+  },
+  "policyDetails": {
+    "startDate": "2025-12-31"
+  },
+  "hasRefusalProblem": true,
+  "refusalYear": null,
+  "refusalReason": "Reason for refusal"
+}
+
+### Request to relaxed functional validation endpoint
+POST {{FunctionalValidation_HostAddress}}/insurances/functional-rigid
+Accept: application/json
+Content-Type: application/json
+
+{
+  "mainApplicant": {
+    "firstName": "John",
+    "lastName": "Smith",
+    "dateOfBirth": "2000-01-02"
+  },
+  "policyDetails": {
+    "startDate": "2025-12-31"
+  },
+  "hasRefusalProblem": false
+}
+
+###
