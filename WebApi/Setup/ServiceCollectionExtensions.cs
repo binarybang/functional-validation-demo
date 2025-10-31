@@ -3,6 +3,7 @@ using ValidationApproach.Functional.ErrorsWithPath.ForLaxDomain;
 using ErrorsWithPath;
 
 using ValidationApproach.Functional.ErrorsWithPath.ForRigidDomain;
+using ValidationApproach.Functional.ErrorsWithPath.SeqInsteadOfError;
 
 namespace WebApi.Setup;
 
@@ -18,6 +19,7 @@ public static class ServiceCollectionExtensions {
       .AddTransient<IRelaxedFunctionalApplyForInsuranceRequestMapper,
         RelaxedFunctionalApplyForInsuranceRequestMapper>()
       .AddTransient<ILaxWithTypedErrorsMapper, LaxWithTypedErrorsMapper>()
-      .AddTransient<IRigidWithTypedErrorsMapper, RigidWithTypedErrorsMapper>();
+      .AddTransient<IRigidWithTypedErrorsMapper, RigidWithTypedErrorsMapper>()
+      .AddTransient<IRigidWithTypedErrorSeqMapper, RigidWithTypedErrorSeqMapper>();
   }
 }

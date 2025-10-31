@@ -38,8 +38,25 @@ Content-Type: application/json
   "refusalReason": "Reason for refusal"
 }
 
-### Request to relaxed functional validation endpoint
+### Request to rigid functional validation endpoint
 POST {{FunctionalValidation_HostAddress}}/insurances/functional-rigid
+Accept: application/json
+Content-Type: application/json
+
+{
+  "mainApplicant": {A
+    "firstName": "John",
+    "lastName": "Smith",
+    "dateOfBirth": "2000-01-02"
+  },
+  "policyDetails": {
+    "startDate": "2025-12-31"
+  },
+  "hasRefusalProblem": false
+}
+
+### Same rigid functional approach but with a Seq<ValidationError> instead of using Error's Monoid trait
+POST {{FunctionalValidation_HostAddress}}/insurances/functional-rigid-seq
 Accept: application/json
 Content-Type: application/json
 

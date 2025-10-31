@@ -20,3 +20,10 @@ public record YearOutOfBounds(ValuePath Path, int MinYear, int MaxYear, int Spec
 
 public record StartDateInThePast(ValuePath Path, DateOnly SpecifiedDate)
   : ValidationError(Path, $"Start date should not be in the past, but {SpecifiedDate} is specified");
+
+
+public static class ErrorExtensions {
+  public static Seq<ValidationError> InvalidSeq<T>(this T error) where T : ValidationError {
+    return [error];
+  }
+}

@@ -11,20 +11,24 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using ValidationApproach.Fluent.Mappers;
 using ValidationApproach.Functional.ErrorsWithPath.ForLaxDomain;
 using ValidationApproach.Functional.ErrorsWithPath.ForRigidDomain;
+using ValidationApproach.Functional.ErrorsWithPath.SeqInsteadOfError;
 
 namespace WebApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
 public class InsurancesController : ControllerBase {
-  private ILaxWithTypedErrorsMapper _laxFunctionalMapper;
-  private IRigidWithTypedErrorsMapper _rigidFunctionalMapper;
+  private readonly ILaxWithTypedErrorsMapper _laxFunctionalMapper;
+  private readonly IRigidWithTypedErrorsMapper _rigidFunctionalMapper;
+  private readonly IRigidWithTypedErrorSeqMapper _rigidFunctionalSeqMapper; 
 
   public InsurancesController(
     ILaxWithTypedErrorsMapper laxFunctionalMapper, 
-    IRigidWithTypedErrorsMapper rigidFunctionalMapper) {
+    IRigidWithTypedErrorsMapper rigidFunctionalMapper, 
+    IRigidWithTypedErrorSeqMapper rigidFunctionalSeqMapper) {
     _laxFunctionalMapper = laxFunctionalMapper;
     _rigidFunctionalMapper = rigidFunctionalMapper;
+    _rigidFunctionalSeqMapper = rigidFunctionalSeqMapper;
   }
 
   [HttpPost("fluent")]
@@ -52,12 +56,32 @@ public class InsurancesController : ControllerBase {
         err => ValidationProblem(ConvertErrorToValidationProblemDetails(err))
       );
   }
+  
+  [HttpPost("functional-rigid-seq")]
+  public IActionResult ApplyForInsuranceFunctionalRigidSeq(ApplyForInsuranceRequest request) {
+    var validatedApplication = _rigidFunctionalSeqMapper.MapToDomainModel(request);
+    return validatedApplication
+      .Match(
+        app => Ok("Application is ready for processing:" + app),
+        err => ValidationProblem(ConvertErrorSeqToValidationProblemDetails(err))
+      );
+  }
 
   private static ModelStateDictionary ConvertErrorToValidationProblemDetails(Error errors) {
     return errors
       .Filter<ValidationError>()
       .AsIterable()
       .Cast<ValidationError>()
+      .Fold(
+        new ModelStateDictionary(),
+        (msd, e) => {
+          msd.AddModelError(e.Path.FullPath(), e.Message);
+          return msd;
+        });
+  }
+  
+  private static ModelStateDictionary ConvertErrorSeqToValidationProblemDetails(Seq<ValidationError> errors) {
+    return errors
       .Fold(
         new ModelStateDictionary(),
         (msd, e) => {
