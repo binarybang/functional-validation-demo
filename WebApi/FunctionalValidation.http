@@ -44,7 +44,7 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "mainApplicant": {A
+  "mainApplicant": {
     "firstName": "John",
     "lastName": "Smith",
     "dateOfBirth": "2000-01-02"
