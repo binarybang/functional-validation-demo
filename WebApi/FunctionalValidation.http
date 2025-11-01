@@ -20,7 +20,7 @@ Content-Type: application/json
 }
 
 ### Request to FluentValidation-based endpoint when validation has been skipped
-POST {{FunctionalValidation_HostAddress}}/insurances/fluent
+POST {{FunctionalValidation_HostAddress}}/insurances/fluent-missing
 Accept: application/json
 Content-Type: application/json
 

@@ -19,6 +19,7 @@ public class ApplicantValidator : AbstractValidator<ContractApplicant> {
         var minDate = currentDate.AddYears(-100);
 
         return minDate <= d && d <= maxDate;
-      });
+      })
+      .WithMessage("Applicant must be at least 18 years old and at most 100 years old");
   }
 }

@@ -1,7 +1,11 @@
+using ApiContract;
+
 using ValidationApproach.Functional;
 using ValidationApproach.Functional.ErrorsWithPath.ForLaxDomain;
-using ErrorsWithPath;
 
+using FluentValidation;
+
+using ValidationApproach.Fluent.Validators;
 using ValidationApproach.Functional.ErrorsWithPath.ForRigidDomain;
 using ValidationApproach.Functional.ErrorsWithPath.SeqInsteadOfError;
 
@@ -16,6 +20,7 @@ public static class ServiceCollectionExtensions {
   
   public static IServiceCollection AddValidationServices(this IServiceCollection services) {
     return services
+      .AddScoped<IValidator<ApplyForInsuranceRequest>, ApplyForInsuranceRequestValidator>()
       .AddTransient<IRelaxedFunctionalApplyForInsuranceRequestMapper,
         RelaxedFunctionalApplyForInsuranceRequestMapper>()
       .AddTransient<ILaxWithTypedErrorsMapper, LaxWithTypedErrorsMapper>()
