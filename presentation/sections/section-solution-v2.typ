@@ -117,6 +117,51 @@ var customer = (firstName, lastName)
   .Apply((fn, ln) => new Customer(fn, ln));
 ```
 
+== Dealing with value paths
+- If we want to maintain level of information similar to FV, we need property paths
+
+```json
+"errors": {
+  "MainApplicant.DateOfBirth": [
+    "Applicant must be at least 18 years old and at most 100 years old"
+  ]
+}
+```
+
+#pagebreak()
+
+```cs
+public record ValuePath {
+  private readonly List<ValuePathSegment> _segments;
+
+  public static ValuePath Root => new([]);
+
+  private ValuePath(List<ValuePathSegment> segments) {
+    _segments = segments;
+  }
+  //...
+  public ValuePath Combine(string path) {
+    return new ValuePath([
+      .._segments,
+      new ValuePathSegment.Raw(path)
+    ]);
+  }
+```
+
+#pagebreak()
+
+```cs
+public abstract record ValuePathSegment {
+  public sealed record Raw(string Path) : ValuePathSegment;
+  public sealed record ExpressionBased<T>(Expression<Func<T, object>> PathExpression): ValuePathSegment;
+}
+```
+
+- `ValidationError` has a property of type `ValuePath`
+- Nested validation calls accept a copy of `ValuePath` with added property name
+- Mapping `ValidationError` to a problem details item uses `ValuePath` to generate the error key
+
+
 == Demo
 #link("https://github.com/binarybang/functional-validation-demo")[Demo repository on Github]
 - Classic FluentValidation-based implementation
