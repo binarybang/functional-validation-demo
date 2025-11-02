@@ -1,5 +1,5 @@
 #import "@preview/touying:0.6.1": *
-#import themes.metropolis: *
+#import "/themes/theme-setup.typ": *
 
 = Conclusions
 
@@ -25,7 +25,7 @@
 - Modern C\# versions are slowly going somewhere in that direction:
   - Nominal type unions (spec draft is close to completion, availability still unclear) \
     `Validation`/`Option` etc. are easier to implement that way
-  - "Generic math": #link("https://learn.microsoft.com/en-us/dotnet/api/system.numerics.iadditiveidentity-2?view=net-9.0")[IAdditiveIdentity] + #link("https://learn.microsoft.com/en-us/dotnet/api/system.numerics.iadditionoperators-3?view=net-9.0")[IAdditionOperators] \~= Semigroup + Monoid
+  - "Generic math": #link("https://learn.microsoft.com/en-us/dotnet/api/system.numerics.iadditiveidentity-2")[IAdditiveIdentity] + #link("https://learn.microsoft.com/en-us/dotnet/api/system.numerics.iadditionoperators-3")[IAdditionOperators] ≈ Semigroup + Monoid
   - Proper built-in implementation is unlikely, see #link("https://github.com/dotnet/runtime/issues/76225#issuecomment-1264640937")[related GH discussion]
 
 #pagebreak()

@@ -1,5 +1,5 @@
 #import "@preview/touying:0.6.1": *
-#import themes.metropolis: *
+#import "/themes/theme-setup.typ": *
 
 = Solution v1: App layer models and FluentValidation
 

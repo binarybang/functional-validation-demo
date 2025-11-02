@@ -1,14 +1,14 @@
 #import "@preview/touying:0.6.1": *
-#import themes.metropolis: *
+#import "/themes/theme-setup.typ": *
 
-= Legacy state
+= Stating the problem
 
-== API contracts are the base
+== API contracts are the base point
 
 - Modeling the data structures is minimal with API contracts often being the only representation.
 - API contracts are modeled in a way that makes them easier to 
   - consume them from the frontend application
-  - copy them when automation doesn't provide reusable contracts
+  - copy when automation doesn't provide reusable contracts
 
 This leads to various issues with service design.
 
