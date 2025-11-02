@@ -2,7 +2,7 @@ using ApiContract;
 
 using ErrorsWithPath.Errors;
 
-using RigidDomain;
+using StrictDomain;
 
 namespace ValidationApproach.Functional.ErrorsWithPath.SeqInsteadOfError;
 

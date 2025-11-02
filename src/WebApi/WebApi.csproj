@@ -12,10 +12,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\src\ApiContract\ApiContract.csproj" />
-      <ProjectReference Include="..\src\LaxDomain\LaxDomain.csproj" />
-      <ProjectReference Include="..\src\ValidationApproach.Fluent\ValidationApproach.Fluent.csproj" />
-      <ProjectReference Include="..\src\ValidationApproach.Functional\ValidationApproach.Functional.csproj" />
+      <ProjectReference Include="..\ApiContract\ApiContract.csproj" />
+      <ProjectReference Include="..\LaxDomain\LaxDomain.csproj" />
+      <ProjectReference Include="..\ValidationApproach.Fluent\ValidationApproach.Fluent.csproj" />
+      <ProjectReference Include="..\ValidationApproach.Functional\ValidationApproach.Functional.csproj" />
     </ItemGroup>
 
 </Project>

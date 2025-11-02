@@ -2,7 +2,7 @@
 
 using Vogen;
 
-namespace RigidDomain;
+namespace StrictDomain;
 
 public record InsuranceApplication {
   public required Applicant MainApplicant { get; init; }

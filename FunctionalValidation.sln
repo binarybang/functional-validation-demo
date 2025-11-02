@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{C9862473-A950-4F7E-B369-3E69C21279DB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "src\WebApi\WebApi.csproj", "{C9862473-A950-4F7E-B369-3E69C21279DB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0E99AE27-A866-4F8B-98A4-AB0BBB8A1023}"
 EndProject
@@ -12,7 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValidationApproach.Fluent",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValidationApproach.Functional", "src\ValidationApproach.Functional\ValidationApproach.Functional.csproj", "{9EE5B78A-52FB-4317-84F1-9FB765314439}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RigidDomain", "src\RigidDomain\RigidDomain.csproj", "{06875D1B-0877-4C96-A700-6E0D99E3FE67}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RigidDomain", "src\StrictDomain\StrictDomain.csproj", "{06875D1B-0877-4C96-A700-6E0D99E3FE67}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

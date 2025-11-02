@@ -9,7 +9,7 @@
     <ItemGroup>
       <ProjectReference Include="..\ApiContract\ApiContract.csproj" />
       <ProjectReference Include="..\LaxDomain\LaxDomain.csproj" />
-      <ProjectReference Include="..\RigidDomain\RigidDomain.csproj" />
+      <ProjectReference Include="..\StrictDomain\StrictDomain.csproj" />
     </ItemGroup>
 
     <ItemGroup>

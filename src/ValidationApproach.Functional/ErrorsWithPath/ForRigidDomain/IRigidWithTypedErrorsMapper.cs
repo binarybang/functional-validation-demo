@@ -2,7 +2,7 @@ using ApiContract;
 
 using LanguageExt.Common;
 
-using RigidDomain;
+using StrictDomain;
 
 namespace ValidationApproach.Functional.ErrorsWithPath.ForRigidDomain;
 
