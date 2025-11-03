@@ -2,18 +2,23 @@
 
 using ErrorsWithPath.Errors;
 
+using LanguageExt.Common;
+
 using StrictDomain;
 
-namespace ValidationApproach.Functional.ErrorsWithPath.SeqInsteadOfError;
+using ValidationApproach.Functional.ErrorsWithPath.Errors;
+using ValidationApproach.Functional.ErrorsWithPath.ForStrictDomain;
 
-public class RigidWithTypedErrorSeqMapper : IRigidWithTypedErrorSeqMapper {
+namespace ValidationApproach.Functional.ErrorsWithPath.ForStrictDomain;
+
+public class StrictWithTypedErrorsMapper : IStrictWithTypedErrorsMapper {
   private readonly TimeProvider _timeProvider;
 
-  public RigidWithTypedErrorSeqMapper(TimeProvider timeProvider) {
+  public StrictWithTypedErrorsMapper(TimeProvider timeProvider) {
     _timeProvider = timeProvider;
   }
 
-  public Validation<Seq<ValidationError>, InsuranceApplication> MapToDomainModel(ApplyForInsuranceRequest source) {
+  public Validation<Error, InsuranceApplication> MapToDomainModel(ApplyForInsuranceRequest source) {
     var root = ValuePath.Root;
     return (
       MapMainApplicant(source.MainApplicant, root.Combine(nameof(source.MainApplicant))),
@@ -28,7 +33,7 @@ public class RigidWithTypedErrorSeqMapper : IRigidWithTypedErrorSeqMapper {
     }).As();
   }
 
-  private Validation<Seq<ValidationError>, Option<AcceptanceProblem>> MapRefusal(ApplyForInsuranceRequest source, ValuePath valuePath) {
+  private Validation<Error, Option<AcceptanceProblem>> MapRefusal(ApplyForInsuranceRequest source, ValuePath valuePath) {
     if (!source.HasRefusalProblem) {
       return Option<AcceptanceProblem>.None;
     }
@@ -42,38 +47,38 @@ public class RigidWithTypedErrorSeqMapper : IRigidWithTypedErrorSeqMapper {
       })).As();
   }
 
-  private Validation<Seq<ValidationError>, RefusalReason> MapRefusalReason(string? reason, ValuePath valuePath) {
+  private Validation<Error, RefusalReason> MapRefusalReason(string? reason, ValuePath valuePath) {
     if (reason == null) {
-      return new FieldIsRequired(valuePath, "Refusal reason").InvalidSeq();
+      return new FieldIsRequired(valuePath, "Refusal reason");
     }
 
     if (reason.Length is < 1 or > 200) {
-      return new LengthOutOfBounds(valuePath, 1, 200).InvalidSeq();
+      return new LengthOutOfBounds(valuePath, 1, 200);
     }
 
     return RefusalReason.From(reason);
   }
 
-  private Validation<Seq<ValidationError>, RefusalYear> MapRefusalYear(int? year, ValuePath valuePath) {
+  private Validation<Error, RefusalYear> MapRefusalYear(int? year, ValuePath valuePath) {
     if (!year.HasValue) {
-      return new FieldIsRequired(valuePath, Option<string>.None).InvalidSeq();
+      return new FieldIsRequired(valuePath, Option<string>.None);
     }
     
     var currentYear = _timeProvider.GetLocalNow().Year;
     var minAllowedYear = currentYear - 10;
     return minAllowedYear <= year.Value && year.Value <= currentYear
       ? RefusalYear.From(year.Value)
-      : new YearOutOfBounds(valuePath, minAllowedYear, currentYear, year.Value).InvalidSeq();
+      : new YearOutOfBounds(valuePath, minAllowedYear, currentYear, year.Value);
   }
   
-  private Validation<Seq<ValidationError>, Applicant> MapMainApplicant(ContractApplicant? applicant, ValuePath valuePath) {
+  private Validation<Error, Applicant> MapMainApplicant(ContractApplicant? applicant, ValuePath valuePath) {
     return MapApplicant(applicant, valuePath)
       .Bind(app => app.Match(
-        Success<Seq<ValidationError>, Applicant>, 
-        new FieldIsRequired(valuePath, "Main applicant").InvalidSeq()));
+        Success<Error, Applicant>, 
+        new FieldIsRequired(valuePath, "Main applicant")));
   }
 
-  private Validation<Seq<ValidationError>, Option<Applicant>> MapApplicant(ContractApplicant? applicant, ValuePath valuePath) {
+  private Validation<Error, Option<Applicant>> MapApplicant(ContractApplicant? applicant, ValuePath valuePath) {
     var possibleValidatedApplicant =
       from presentApplicant in Optional(applicant)
       let validParts = (
@@ -87,34 +92,34 @@ public class RigidWithTypedErrorSeqMapper : IRigidWithTypedErrorSeqMapper {
     return possibleValidatedApplicant.IfNone(Option<Applicant>.None);
   }
 
-  private Validation<Seq<ValidationError>, DateOfBirth> MapDateOfBirth(DateOnly applicantDateOfBirth, ValuePath valuePath) {
+  private Validation<Error, DateOfBirth> MapDateOfBirth(DateOnly applicantDateOfBirth, ValuePath valuePath) {
     var currentDate = DateOnly.FromDateTime(_timeProvider.GetLocalNow().Date);
     var minDate = currentDate.AddYears(-100);
     var maxDate = currentDate.AddYears(-18);
     
     return minDate <= applicantDateOfBirth && applicantDateOfBirth <= maxDate
       ? DateOfBirth.From(applicantDateOfBirth)
-      : new DateOutOfBounds(valuePath, minDate, maxDate, applicantDateOfBirth).InvalidSeq();
+      : new DateOutOfBounds(valuePath, minDate, maxDate, applicantDateOfBirth);
   }
 
-  private Validation<Seq<ValidationError>, FirstName> MapFirstName(string firstName, ValuePath valuePath) {
+  private Validation<Error, FirstName> MapFirstName(string firstName, ValuePath valuePath) {
     return firstName.Length is > 1 and < 50 
       ? FirstName.From(firstName) 
-      : new LengthOutOfBounds(valuePath, 1, 50).InvalidSeq();; 
+      : new LengthOutOfBounds(valuePath, 1, 50); 
   }
   
-  private Validation<Seq<ValidationError>, LastName> MapLastName(string lastName, ValuePath valuePath) {
+  private Validation<Error, LastName> MapLastName(string lastName, ValuePath valuePath) {
     return lastName.Length is > 1 and < 50 
       ? LastName.From(lastName) 
-      : new LengthOutOfBounds(valuePath, 1, 50).InvalidSeq();; 
+      : new LengthOutOfBounds(valuePath, 1, 50); 
   }
 
-  private Validation<Seq<ValidationError>, PolicyDetails> MapPolicyDetails(ContractPolicyDetails source, ValuePath valuePath) {
+  private Validation<Error, PolicyDetails> MapPolicyDetails(ContractPolicyDetails source, ValuePath valuePath) {
     var currentDate = DateOnly.FromDateTime(_timeProvider.GetLocalNow().Date);
     return currentDate <= source.StartDate
       ? new PolicyDetails {
         StartDate = StartDate.From(source.StartDate)
       }
-      : new StartDateInThePast(valuePath.Combine(nameof(source.StartDate)), source.StartDate).InvalidSeq();;
+      : new StartDateInThePast(valuePath.Combine(nameof(source.StartDate)), source.StartDate);
   }
 }

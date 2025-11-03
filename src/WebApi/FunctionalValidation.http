@@ -38,8 +38,8 @@ Content-Type: application/json
   "refusalReason": "Reason for refusal"
 }
 
-### Request to rigid functional validation endpoint
-POST {{FunctionalValidation_HostAddress}}/insurances/functional-rigid
+### Request to strict functional validation endpoint
+POST {{FunctionalValidation_HostAddress}}/insurances/functional-strict
 Accept: application/json
 Content-Type: application/json
 
@@ -55,8 +55,8 @@ Content-Type: application/json
   "hasRefusalProblem": false
 }
 
-### Same rigid functional approach but with a Seq<ValidationError> instead of using Error's Monoid trait
-POST {{FunctionalValidation_HostAddress}}/insurances/functional-rigid-seq
+### Same strict functional approach but with a Seq<ValidationError> instead of using Error's Monoid trait
+POST {{FunctionalValidation_HostAddress}}/insurances/functional-strict-seq
 Accept: application/json
 Content-Type: application/json
 

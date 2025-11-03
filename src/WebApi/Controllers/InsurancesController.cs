@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 using ValidationApproach.Fluent.Mappers;
 using ValidationApproach.Functional.ErrorsWithPath.ForLaxDomain;
-using ValidationApproach.Functional.ErrorsWithPath.ForRigidDomain;
+using ValidationApproach.Functional.ErrorsWithPath.ForStrictDomain;
 using ValidationApproach.Functional.ErrorsWithPath.SeqInsteadOfError;
 
 namespace WebApi.Controllers;
@@ -23,18 +23,18 @@ namespace WebApi.Controllers;
 public class InsurancesController : ControllerBase {
   private readonly IValidator<ApplyForInsuranceRequest> _fluentValidationValidator;
   private readonly ILaxWithTypedErrorsMapper _laxFunctionalMapper;
-  private readonly IRigidWithTypedErrorsMapper _rigidFunctionalMapper;
-  private readonly IRigidWithTypedErrorSeqMapper _rigidFunctionalSeqMapper; 
+  private readonly IStrictWithTypedErrorsMapper _strictFunctionalMapper;
+  private readonly IStrictWithTypedErrorSeqMapper _strictFunctionalSeqMapper; 
 
   public InsurancesController(
     IValidator<ApplyForInsuranceRequest> fluentValidationValidator,
     ILaxWithTypedErrorsMapper laxFunctionalMapper, 
-    IRigidWithTypedErrorsMapper rigidFunctionalMapper, 
-    IRigidWithTypedErrorSeqMapper rigidFunctionalSeqMapper) {
+    IStrictWithTypedErrorsMapper strictFunctionalMapper, 
+    IStrictWithTypedErrorSeqMapper strictFunctionalSeqMapper) {
     _fluentValidationValidator = fluentValidationValidator;
     _laxFunctionalMapper = laxFunctionalMapper;
-    _rigidFunctionalMapper = rigidFunctionalMapper;
-    _rigidFunctionalSeqMapper = rigidFunctionalSeqMapper;
+    _strictFunctionalMapper = strictFunctionalMapper;
+    _strictFunctionalSeqMapper = strictFunctionalSeqMapper;
   }
 
   [HttpPost("fluent")]
@@ -64,9 +64,9 @@ public class InsurancesController : ControllerBase {
       );
   }
   
-  [HttpPost("functional-rigid")]
-  public IActionResult ApplyForInsuranceFunctionalRigid(ApplyForInsuranceRequest request) {
-    var validatedApplication = _rigidFunctionalMapper.MapToDomainModel(request);
+  [HttpPost("functional-strict")]
+  public IActionResult ApplyForInsuranceFunctionalStrict(ApplyForInsuranceRequest request) {
+    var validatedApplication = _strictFunctionalMapper.MapToDomainModel(request);
     return validatedApplication
       .Match(
         app => Ok("Application is ready for processing:" + app),
@@ -74,9 +74,9 @@ public class InsurancesController : ControllerBase {
       );
   }
   
-  [HttpPost("functional-rigid-seq")]
-  public IActionResult ApplyForInsuranceFunctionalRigidSeq(ApplyForInsuranceRequest request) {
-    var validatedApplication = _rigidFunctionalSeqMapper.MapToDomainModel(request);
+  [HttpPost("functional-strict-seq")]
+  public IActionResult ApplyForInsuranceFunctionalStrictSeq(ApplyForInsuranceRequest request) {
+    var validatedApplication = _strictFunctionalSeqMapper.MapToDomainModel(request);
     return validatedApplication
       .Match(
         app => Ok("Application is ready for processing:" + app),

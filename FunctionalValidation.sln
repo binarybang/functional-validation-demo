@@ -12,7 +12,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValidationApproach.Fluent",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValidationApproach.Functional", "src\ValidationApproach.Functional\ValidationApproach.Functional.csproj", "{9EE5B78A-52FB-4317-84F1-9FB765314439}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RigidDomain", "src\StrictDomain\StrictDomain.csproj", "{06875D1B-0877-4C96-A700-6E0D99E3FE67}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StrictDomain", "src\StrictDomain\StrictDomain.csproj", "{06875D1B-0877-4C96-A700-6E0D99E3FE67}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C7504520-45F0-4B26-9283-75A87D092A52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValidationApproach.Functional.Tests", "tests\ValidationApproach.Functional.Tests\ValidationApproach.Functional.Tests.csproj", "{194118C8-8AA6-4E36-BC9B-BE5FB4274BFD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +48,10 @@ Global
 		{06875D1B-0877-4C96-A700-6E0D99E3FE67}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06875D1B-0877-4C96-A700-6E0D99E3FE67}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06875D1B-0877-4C96-A700-6E0D99E3FE67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{194118C8-8AA6-4E36-BC9B-BE5FB4274BFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{194118C8-8AA6-4E36-BC9B-BE5FB4274BFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{194118C8-8AA6-4E36-BC9B-BE5FB4274BFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{194118C8-8AA6-4E36-BC9B-BE5FB4274BFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{95C55508-D658-49CB-9A2A-94C74E95F659} = {0E99AE27-A866-4F8B-98A4-AB0BBB8A1023}
@@ -52,5 +60,6 @@ Global
 		{C9862473-A950-4F7E-B369-3E69C21279DB} = {0E99AE27-A866-4F8B-98A4-AB0BBB8A1023}
 		{9EE5B78A-52FB-4317-84F1-9FB765314439} = {0E99AE27-A866-4F8B-98A4-AB0BBB8A1023}
 		{06875D1B-0877-4C96-A700-6E0D99E3FE67} = {0E99AE27-A866-4F8B-98A4-AB0BBB8A1023}
+		{194118C8-8AA6-4E36-BC9B-BE5FB4274BFD} = {C7504520-45F0-4B26-9283-75A87D092A52}
 	EndGlobalSection
 EndGlobal

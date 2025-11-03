@@ -1,5 +1,6 @@
 using LanguageExt.Common;
-using LanguageExt.Traits;
+
+using ValidationApproach.Functional.ErrorsWithPath.Errors;
 
 namespace ErrorsWithPath.Errors;
 

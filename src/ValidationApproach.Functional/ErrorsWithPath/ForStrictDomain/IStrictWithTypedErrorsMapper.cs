@@ -4,8 +4,8 @@ using LanguageExt.Common;
 
 using StrictDomain;
 
-namespace ValidationApproach.Functional.ErrorsWithPath.ForRigidDomain;
+namespace ValidationApproach.Functional.ErrorsWithPath.ForStrictDomain;
 
-public interface IRigidWithTypedErrorsMapper {
+public interface IStrictWithTypedErrorsMapper {
   Validation<Error, InsuranceApplication> MapToDomainModel(ApplyForInsuranceRequest source);
 }

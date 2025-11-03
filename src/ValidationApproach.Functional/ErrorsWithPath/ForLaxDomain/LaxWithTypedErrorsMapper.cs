@@ -1,10 +1,12 @@
 ﻿using ApiContract;
 
+using ErrorsWithPath.Errors;
+
 using LanguageExt.Common;
 
 using LaxDomain;
 
-using ErrorsWithPath.Errors;
+using ValidationApproach.Functional.ErrorsWithPath.Errors;
 
 namespace ValidationApproach.Functional.ErrorsWithPath.ForLaxDomain;
 

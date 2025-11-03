@@ -1,12 +1,11 @@
 using ApiContract;
 
-using ValidationApproach.Functional;
-using ValidationApproach.Functional.ErrorsWithPath.ForLaxDomain;
-
 using FluentValidation;
 
 using ValidationApproach.Fluent.Validators;
-using ValidationApproach.Functional.ErrorsWithPath.ForRigidDomain;
+using ValidationApproach.Functional;
+using ValidationApproach.Functional.ErrorsWithPath.ForLaxDomain;
+using ValidationApproach.Functional.ErrorsWithPath.ForStrictDomain;
 using ValidationApproach.Functional.ErrorsWithPath.SeqInsteadOfError;
 
 namespace WebApi.Setup;
@@ -24,7 +23,7 @@ public static class ServiceCollectionExtensions {
       .AddTransient<IRelaxedFunctionalApplyForInsuranceRequestMapper,
         RelaxedFunctionalApplyForInsuranceRequestMapper>()
       .AddTransient<ILaxWithTypedErrorsMapper, LaxWithTypedErrorsMapper>()
-      .AddTransient<IRigidWithTypedErrorsMapper, RigidWithTypedErrorsMapper>()
-      .AddTransient<IRigidWithTypedErrorSeqMapper, RigidWithTypedErrorSeqMapper>();
+      .AddTransient<IStrictWithTypedErrorsMapper, StrictWithTypedErrorsMapper>()
+      .AddTransient<IStrictWithTypedErrorSeqMapper, StrictWithTypedErrorSeqMapper>();
   }
 }
