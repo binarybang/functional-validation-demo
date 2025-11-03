@@ -21,7 +21,7 @@ public abstract record Validation<E, A> {
 }
 
 public static class Validator {
-  public static Validation<string, InsuranceApplication> ValidateApplication(InsuranceApplicationRequest req) {
+  public static Validation<string, InsuranceApplication> Validate(InsuranceApplicationRequest req) {
     /// implementation here
   }
 }
@@ -50,7 +50,7 @@ public static class Validator {
 
 - #link("https://github.com/louthy/language-ext")[LanguageExt] is a library which implements sort of "functional BCL" for C\#
 - Provides a wide variety of functional data structures and behaviors
-- We're primarily interested in `Validation<F, A>` type but a few others are also relevant
+- We're focusing on `Validation<F, A>` type here but a few others are also relevant
 
 == Short detour: `Semigroup`
 
@@ -62,7 +62,7 @@ public interface Semigroup<A> where A : Semigroup<A>
 }
 ```
 - Example: integers and +, strings/lists and concatenation
-- `Combine` allows for merging values into one we can return
+- `Combine` allows for merging values into one we can return in case of failure
 
 == Short detour: `Monoid`
 

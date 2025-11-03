@@ -1,20 +1,21 @@
 #import "@preview/touying:0.6.1": *
 #import "/themes/theme-setup.typ": *
 
-= Stating the problem
+= The problem
 
-== API contracts are the base point
+== API contracts are the base model
 
-- Modeling the data structures is minimal with API contracts often being the only representation.
-- API contracts are modeled in a way that makes them easier to 
+- Modeling the data structures is minimal with API contracts often being the only representation
+- API contracts are often designed in a way that makes them easier to 
   - consume them from the frontend application
   - copy when automation doesn't provide reusable contracts
 
-This leads to various issues with service design.
+This leads to various issues with the design of inner layers.
 
 == Inconsistent state
 
-- Contracts are designed based on what the frontend input model provides
+- Contracts are based on the exact structure of frontend input model
+- Once a contract is used, changing it is a tedious process
 - Backend models do not have invariants encoded in them
 - Constant possibility of inconsistent state
 

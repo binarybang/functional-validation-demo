@@ -8,7 +8,7 @@
     aspect-ratio: "16-9",
     config-info(
         title: upper("Functional validation"),
-        subtitle: [Solving API design issues with functional concepts]
+        subtitle: [Improving service design with functional concepts]
     )
 )
 
