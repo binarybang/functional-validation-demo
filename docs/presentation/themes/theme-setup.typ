@@ -3,5 +3,5 @@
 #import themes.metropolis: *
 #let presentation-theme = metropolis-theme;
 
-#import "indy/indy.typ": *
-#let presentation-theme = indy-theme;
+//#import "indy/indy.typ": *
+//#let presentation-theme = indy-theme;
